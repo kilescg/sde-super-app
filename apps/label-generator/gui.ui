@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QGroupBox" name="ConsoleGroupBox">
+      <property name="styleSheet">
+       <string notr="true">	font-size: 12pt;
+	font-family: Arial, sans-serif;</string>
+      </property>
+      <property name="title">
+       <string>Console</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="powerOptionButton">
+         <property name="text">
+          <string>J Link Power Option</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="powerOnButton">
+           <property name="text">
+            <string>Power on (Q)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="powerOffButton">
+           <property name="text">
+            <string>Power Off (W)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="programFileLabel">
+             <property name="text">
+              <string>Select your program</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="flashStatusLabel">
+             <property name="text">
+              <string>Flash Status : None</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="programFileComboBox"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="flashButton">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Flash Program (F)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="devicesLabel">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Devices for Label Printing</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="devicesTableView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="statusLabel">
+           <property name="text">
+            <string>status :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="addDeviceStatusLabel">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Note (Optional)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="noteLineEdit"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="addGoodDeviceButton">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker Green */
+}
+
+QPushButton:pressed {
+    background-color: #357a38; /* Even Darker Green when pressed */
+}</string>
+           </property>
+           <property name="text">
+            <string>Add Good Devices (G)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addBadDeviceButton">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+QPushButton:hover {
+    background-color: #d32f2f; /* Darker Red */
+}
+
+QPushButton:pressed {
+    background-color: #b71c1c; /* Even Darker Red when pressed */
+}</string>
+           </property>
+           <property name="text">
+            <string>Add Faulty Devices (B)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="printNowButton">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Print Now (P)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="clearListButton">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Clear (C)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
