@@ -1,7 +1,7 @@
 from apps.app1.main import App1Window
 from apps.app2.main import App2Window
 from apps.app3.main import App3Window
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QAction
 import sys
 
 
@@ -10,34 +10,32 @@ class SuperApp(QMainWindow):
         super().__init__()
         self.setWindowTitle("SDE Super App")
 
-        self.tab_widget = QTabWidget(self)
-        self.tab_widget.currentChanged.connect(self.adjustWindowSize)
+        self.central_widget = None
 
-        self.app1 = App1Window()
-        self.app2 = App2Window()
-        self.app3 = App3Window()
+        menubar = self.menuBar()
+        file_menu = menubar.addMenu("Apps")
 
-        self.tab_widget.addTab(self.app1, "App 1")
-        self.tab_widget.addTab(self.app2, "App 2")
-        self.tab_widget.addTab(self.app3, "App 3")
+        app1_action = QAction("App 1", self)
+        app1_action.triggered.connect(lambda: self.show_app(App1Window()))
+        file_menu.addAction(app1_action)
 
-        self.setCentralWidget(self.tab_widget)
+        app2_action = QAction("App 2", self)
+        app2_action.triggered.connect(lambda: self.show_app(App2Window()))
+        file_menu.addAction(app2_action)
 
-        # Initialize the window size based on the largest content among all tabs
-        self.adjustWindowSize()
+        app3_action = QAction("App 3", self)
+        app3_action.triggered.connect(lambda: self.show_app(App3Window()))
+        file_menu.addAction(app3_action)
 
-    def adjustWindowSize(self):
-        # Initialize the maximum size
-        max_width = 0
-        max_height = 0
+    def show_app(self, app_widget):
+        if self.central_widget:
+            self.central_widget.hide()
+            self.central_widget.setParent(None)
 
-        for index in range(self.tab_widget.count()):
-            tab = self.tab_widget.widget(index)
-            if tab:
-                max_width = max(max_width, tab.width())
-                max_height = max(max_height, tab.height())
-
-        self.resize(max_width, max_height)
+        self.central_widget = app_widget
+        self.setCentralWidget(app_widget)
+        self.resize(app_widget.size())
+        app_widget.show()
 
 
 if __name__ == "__main__":
