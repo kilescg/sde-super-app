@@ -1,6 +1,6 @@
-from database import *
+from .database import *
 from PyQt5.QtWidgets import QMessageBox
-from utils import *
+from .utils import *
 
 bom_headers = ['bom_id', 'name_prefix', 'devicetype_id',
                'controllertype_id', 'emplacement_id', 'floor_name']

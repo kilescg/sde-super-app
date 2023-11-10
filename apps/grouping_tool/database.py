@@ -1,6 +1,6 @@
 import mysql.connector
 import json
-from utils import *
+from .utils import *
 
 
 class MySQLHandler:
