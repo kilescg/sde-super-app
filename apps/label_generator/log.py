@@ -2,7 +2,7 @@ import csv
 import os
 import mysql.connector
 from datetime import datetime
-from utils import *
+from .utils import *
 
 db_host = "127.0.0.1"
 db_user = "root"

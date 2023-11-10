@@ -1,8 +1,8 @@
 import os
 import threading
-import jlink
-import log
-from utils import *
+from . import jlink
+from . import log
+from .utils import *
 
 mac_id_list = []
 header = ['macId', 'note']
@@ -39,7 +39,8 @@ def flashing_thread_callback(ui):
 
 
 def program_combobox_click_event(ui):
-    program_files_folder = "program_files"
+    program_files_folder = os.path.join(os.path.dirname(
+        os.path.realpath(__file__)), "program_files")
 
     # Clear the current items in the combobox
     currentText = ui.programFileComboBox.currentText()
@@ -92,8 +93,10 @@ def add_good_device_event(ui):
     res = log.insert_child_device(data)
 
     if res:
+        log_directory = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "log/devicesLog.csv")
         mac_id_list.append([mac_id, note])
-        log.log_mac_id(mac_id, note, "database/devicesLog.csv")
+        log.log_mac_id(mac_id, note, log_directory)
     else:
         ui.addDeviceStatusLabel.setText(
             "<span style=\"color:red\">Data Already in DB</span></p>")
@@ -119,7 +122,9 @@ def add_bad_device_event(ui):
 
 def print_now_event(ui):
     global mac_id_list
-    log.write_csv(['macID', 'note'], mac_id_list, "database/devicesLog.csv")
+    log_directory = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), "log/devicesLog.csv")
+    log.write_csv(['macID', 'note'], mac_id_list, log_directory)
     for device in mac_id_list:
         if 'Faulty' not in device:
             log.update_print_label_by_mac_id(device[0])  # device 0 equal macId
