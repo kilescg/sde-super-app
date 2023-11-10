@@ -1,6 +1,8 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QMessageBox
-from datetime import datetime
+from PyQt5.QtWidgets import QMessageBox, QHeaderView
+import time
+import random
+import string
 
 
 def populate_table(table_view, headers, data):
@@ -12,6 +14,8 @@ def populate_table(table_view, headers, data):
         model.appendRow(row_items)
 
     table_view.setModel(model)
+    header = table_view.horizontalHeader()
+    header.setSectionResizeMode(QHeaderView.Stretch)
 
 
 def get_data_from_table_view(table_view):
@@ -34,18 +38,22 @@ def get_data_from_table_view(table_view):
     return data
 
 
+def get_date_time():
+    return time.strftime('%Y-%m-%d %H:%M:%S')
+
+
+def send_request():
+    pass
+
+
 def delete_selected_row(table_view):
     # Get the currently selected row(s)
     try:
         selected_indexes = table_view.selectionModel().selectedRows()
 
         if not selected_indexes:
-            QMessageBox.warning(
-                None,
-                "Warning",
-                "No row selected. Please select a row to delete.",
-                QMessageBox.Ok,
-            )
+            show_warning_window(
+                "No row selected. Please select a row to delete.")
             return
 
         # Sort the selected indexes in reverse order to avoid index shifting
@@ -59,19 +67,29 @@ def delete_selected_row(table_view):
         # Clear the selection
         table_view.clearSelection()
     except:
-        QMessageBox.warning(
-            None,
-            "Warning",
-            "No row selected. Please select a row to delete.",
-            QMessageBox.Ok,
-        )
+        show_warning_window("No row selected. Please select a row to delete.")
         return
 
 
-def get_date_time():
-    now = datetime.now()
-    return now.strftime("%Y-%m-%d,%H:%M:%S")
+def show_warning_window(message):
+    QMessageBox.warning(
+        None,
+        "Warning",
+        message,
+        QMessageBox.Ok,
+    )
+    return
 
 
-def send_request():
-    pass
+def random_string(char_cnt):
+    # Define the characters and digits to choose from
+    characters = string.ascii_letters + string.digits
+
+    # Generate a random 12-character string
+    random_string = ''.join(random.choice(characters) for _ in range(12))
+
+    return random_string
+
+
+if __name__ == '__main__':
+    print(random_string(12))
