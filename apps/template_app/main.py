@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from .ui import Ui_Form  # Import the generated UI module
 
 
-class App3Window(QMainWindow):
+class TemplateWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Form()
@@ -32,6 +32,6 @@ if __name__ == "__main__":
     from PyQt5.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
-    window = App3Window()
+    window = TemplateWindow()
     window.show()
     sys.exit(app.exec_())

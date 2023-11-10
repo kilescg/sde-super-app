@@ -1,6 +1,4 @@
-from apps.app1.main import App1Window
-from apps.app2.main import App2Window
-from apps.app3.main import App3Window
+from apps.template_app.main import TemplateWindow
 from apps.label_generator.main import LabelGenerator
 from apps.grouping_tool.main import GroupingTool
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QAction
@@ -17,27 +15,20 @@ class SuperApp(QMainWindow):
         menubar = self.menuBar()
         file_menu = menubar.addMenu("Apps")
 
-        app1_action = QAction("App 1", self)
-        app1_action.triggered.connect(lambda: self.show_app(App1Window()))
-        file_menu.addAction(app1_action)
-
-        app2_action = QAction("App 2", self)
-        app2_action.triggered.connect(lambda: self.show_app(App2Window()))
-        file_menu.addAction(app2_action)
-
-        app3_action = QAction("App 3", self)
-        app3_action.triggered.connect(lambda: self.show_app(App3Window()))
-        file_menu.addAction(app3_action)
-
         label_generator_action = QAction("Label Generator", self)
         label_generator_action.triggered.connect(
             lambda: self.show_app(LabelGenerator()))
         file_menu.addAction(label_generator_action)
 
-        grouping_tool_action = QAction("Label Generator", self)
+        grouping_tool_action = QAction("Grouping Tool", self)
         grouping_tool_action.triggered.connect(
             lambda: self.show_app(GroupingTool()))
         file_menu.addAction(grouping_tool_action)
+
+        template_action = QAction("Template UI", self)
+        template_action.triggered.connect(
+            lambda: self.show_app(TemplateWindow()))
+        file_menu.addAction(template_action)
 
         self.show_app(LabelGenerator())
 
