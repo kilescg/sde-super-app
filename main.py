@@ -1,6 +1,8 @@
 from apps.app1.main import App1Window
 from apps.app2.main import App2Window
 from apps.app3.main import App3Window
+from apps.label_generator.main import LabelGenerator
+from apps.grouping_tool.main import GroupingTool
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QAction
 import sys
 
@@ -26,6 +28,18 @@ class SuperApp(QMainWindow):
         app3_action = QAction("App 3", self)
         app3_action.triggered.connect(lambda: self.show_app(App3Window()))
         file_menu.addAction(app3_action)
+
+        label_generator_action = QAction("Label Generator", self)
+        label_generator_action.triggered.connect(
+            lambda: self.show_app(LabelGenerator()))
+        file_menu.addAction(label_generator_action)
+
+        grouping_tool_action = QAction("Label Generator", self)
+        grouping_tool_action.triggered.connect(
+            lambda: self.show_app(GroupingTool()))
+        file_menu.addAction(grouping_tool_action)
+
+        self.show_app(LabelGenerator())
 
     def show_app(self, app_widget):
         if self.central_widget:
