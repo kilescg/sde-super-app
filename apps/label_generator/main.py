@@ -30,9 +30,14 @@ class LabelGenerator(QMainWindow):
             lambda: print_now_event(self.ui))
         self.ui.clearListButton.clicked.connect(
             lambda: clear_list_event(self.ui))
+        self.ui.chooseDirectoryButton.clicked.connect(
+            lambda: show_directory_dialog(self.ui, self))
 
     def ComboBoxInitialize(self):
-        program_combobox_click_event(self.ui)
+        program_files_folder = os.path.join(os.path.dirname(
+            os.path.realpath(__file__)), "program_files")
+
+        program_combobox_click_event(self.ui, program_files_folder)
 
     def SetTableHeader(self):
         populate_table_view(self.ui.devicesTableView, header, [])

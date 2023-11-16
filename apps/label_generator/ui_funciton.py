@@ -3,12 +3,15 @@ import threading
 from . import jlink
 from . import log
 from .utils import *
+from PyQt5.QtWidgets import QFileDialog
 
 mac_id_list = []
 header = ['macId', 'note']
 
 IS_MOCK = 0
 mock_cnt = 1
+
+current_program_path = ''
 
 
 def power_on_event():
@@ -28,8 +31,13 @@ def flash_event(ui):
 
 def flashing_thread_callback(ui):
     jlink.power_on()
-    result = jlink.flash_program(os.path.join(
-        "program_files", ui.programFileComboBox.currentText()))
+    if ui.programFileComboBox.currentText() == '':
+        ui.flashStatusLabel.setText(
+            "Flash Status : <span style=\"color:red\">Can located the program file</span></p>")
+        return
+    file_path = os.path.join(
+        current_program_path, ui.programFileComboBox.currentText())
+    result = jlink.flash_program(file_path)
     if result:
         ui.flashStatusLabel.setText(
             "Flash Status : <span style=\"color:green\">Success</span></p>")
@@ -38,25 +46,26 @@ def flashing_thread_callback(ui):
             "Flash Status : <span style=\"color:red\">Fail</span></p>")
 
 
-def program_combobox_click_event(ui):
-    program_files_folder = os.path.join(os.path.dirname(
-        os.path.realpath(__file__)), "program_files")
+def program_combobox_click_event(ui, directory):
+    global current_program_path
 
     # Clear the current items in the combobox
     currentText = ui.programFileComboBox.currentText()
     ui.programFileComboBox.clear()
 
     # Check if the folder exists
-    if os.path.exists(program_files_folder) and os.path.isdir(program_files_folder):
+    if os.path.exists(directory) and os.path.isdir(directory):
         # Get a list of file names in the folder
-        file_names = os.listdir(program_files_folder)
+        file_names = os.listdir(directory)
 
         # Filter out only the files (not directories) and add them to the combobox
         for file_name in file_names:
-            file_path = os.path.join(program_files_folder, file_name)
-            if os.path.isfile(file_path):
+            file_path = os.path.join(directory, file_name)
+            if os.path.isfile(file_path) and (file_name.endswith('.hex') or file_name.endswith('.bin')):
                 ui.programFileComboBox.addItem(file_name)
                 ui.programFileComboBox.setCurrentText(currentText)
+
+    current_program_path = directory
 
 
 def add_good_device_event(ui):
@@ -70,7 +79,6 @@ def add_good_device_event(ui):
     else:
         jlink.power_on()
         mac_id = jlink.mac_id_check()
-    print(mac_id)
     if not mac_id:
         ui.addDeviceStatusLabel.setText(
             "<span style=\"color:red\">Can't read MAC address</span></p>")
@@ -136,3 +144,17 @@ def clear_list_event(ui):
     mac_id_list = []
 
     populate_table_view(ui.devicesTableView, header, mac_id_list)
+
+
+def show_directory_dialog(ui, parent):
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    directory_dialog = QFileDialog()
+    directory_dialog.setOptions(options)
+
+    directory_dialog.setFileMode(QFileDialog.Directory)
+
+    selected_directory = directory_dialog.getExistingDirectory(
+        parent, "Select Directory")
+
+    program_combobox_click_event(ui, selected_directory)

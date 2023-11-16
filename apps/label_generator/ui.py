@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui.ui'
+# Form implementation generated from reading ui file 'ui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -48,9 +48,20 @@ class Ui_MainWindow(object):
         self.flashStatusLabel.setObjectName("flashStatusLabel")
         self.horizontalLayout.addWidget(self.flashStatusLabel)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.programFileComboBox = QtWidgets.QComboBox(self.ConsoleGroupBox)
         self.programFileComboBox.setObjectName("programFileComboBox")
-        self.verticalLayout_2.addWidget(self.programFileComboBox)
+        self.horizontalLayout_7.addWidget(self.programFileComboBox)
+        self.chooseDirectoryButton = QtWidgets.QPushButton(self.ConsoleGroupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.chooseDirectoryButton.sizePolicy().hasHeightForWidth())
+        self.chooseDirectoryButton.setSizePolicy(sizePolicy)
+        self.chooseDirectoryButton.setObjectName("chooseDirectoryButton")
+        self.horizontalLayout_7.addWidget(self.chooseDirectoryButton)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_7)
         self.flashButton = QtWidgets.QPushButton(self.ConsoleGroupBox)
         self.flashButton.setStyleSheet("")
         self.flashButton.setObjectName("flashButton")
@@ -156,6 +167,7 @@ class Ui_MainWindow(object):
         self.powerOffButton.setText(_translate("MainWindow", "Power Off (W)"))
         self.programFileLabel.setText(_translate("MainWindow", "Select your program"))
         self.flashStatusLabel.setText(_translate("MainWindow", "Flash Status : None"))
+        self.chooseDirectoryButton.setText(_translate("MainWindow", "Choose Directory"))
         self.flashButton.setText(_translate("MainWindow", "Flash Program (F)"))
         self.devicesLabel.setText(_translate("MainWindow", "Devices for Label Printing"))
         self.statusLabel.setText(_translate("MainWindow", "status :"))
